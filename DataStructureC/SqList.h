@@ -8,7 +8,7 @@
 #define LIST_INIT_SIZE 100
 #define LIST_INCREMENT 10
 
-//¶¨ÒåË³Ğò±í
+//å®šä¹‰é¡ºåºè¡¨
 typedef struct
 {
 	ElemType *list;
@@ -16,40 +16,40 @@ typedef struct
 	int listsize;
 }SqList;
 
-//º¯ÊıÉùÃ÷
+//å‡½æ•°å£°æ˜
 
-Status InitList(SqList *L);  //³õÊ¼»¯Ò»¸öË³Ğò±í
-Status DestroyList(SqList *L); //Ïú»Ù
-int ListEmpty(SqList L); //ÊÇ·ñÎª¿Õ±í
-Status ClearList(SqList *L);  //ÖØÖÃÎª¿Õ±í
-int ListLength(SqList L); //·µ»ØLµÄÔªËØ¸öÊı
-Status GetElem(SqList L, int i, ElemType *e); //·µ»ØLµÚi£¨i>=1£©¸öÔªËØ£¬ÏÂ±êÎªi-1
-Status ListInsert(SqList *L, int i, ElemType e); //²åÈëµÚi¸öÔªËØ£¬ÏÂ±êÎªi-1
-Status ListDelete(SqList *L, int i, ElemType* e);//É¾³ıµÚi¸öÔªËØ£¬ ÏÂ±êÎªi-1£¬, ÓÃe·µ»Ø
-Status ListTraverse(SqList L, Status(*visit)(ElemType)); //±éÀúË³Ğò±í
-Status NextElem(SqList L, ElemType cur_e, ElemType *next_e); //·µ»Øcur_eµÄºó¼Ì
-Status PriorElem(SqList L, ElemType cur_e, ElemType *pre_e); //·µ»Øcur_eµÄÇ°Çı
-int LocateElem(SqList L, ElemType e, bool (*func)(ElemType, ElemType));//ÅĞ¶ÏeºÍLµÄÔªËØµÄ¹ØÏµ
-int BinarySearch(SqList L, ElemType key);//ÕÛ°ë²éÕÒ
+Status InitList(SqList *L);  //åˆå§‹åŒ–ä¸€ä¸ªé¡ºåºè¡¨
+Status DestroyList(SqList *L); //é”€æ¯
+int ListEmpty(SqList L); //æ˜¯å¦ä¸ºç©ºè¡¨
+Status ClearList(SqList *L);  //é‡ç½®ä¸ºç©ºè¡¨
+int ListLength(SqList L); //è¿”å›Lçš„å…ƒç´ ä¸ªæ•°
+Status GetElem(SqList L, int i, ElemType *e); //è¿”å›Lç¬¬iï¼ˆi>=1ï¼‰ä¸ªå…ƒç´ ï¼Œä¸‹æ ‡ä¸ºi-1
+Status ListInsert(SqList *L, int i, ElemType e); //æ’å…¥ç¬¬iä¸ªå…ƒç´ ï¼Œä¸‹æ ‡ä¸ºi-1
+Status ListDelete(SqList *L, int i, ElemType* e);//åˆ é™¤ç¬¬iä¸ªå…ƒç´ ï¼Œ ä¸‹æ ‡ä¸ºi-1ï¼Œ, ç”¨eè¿”å›
+Status ListTraverse(SqList L, Status(*visit)(ElemType)); //éå†é¡ºåºè¡¨
+Status NextElem(SqList L, ElemType cur_e, ElemType *next_e); //è¿”å›cur_eçš„åç»§
+Status PriorElem(SqList L, ElemType cur_e, ElemType *pre_e); //è¿”å›cur_eçš„å‰é©±
+int LocateElem(SqList L, ElemType e, bool (*func)(ElemType, ElemType));//åˆ¤æ–­eå’ŒLçš„å…ƒç´ çš„å…³ç³»
+int BinarySearch(SqList L, ElemType key);//æŠ˜åŠæŸ¥æ‰¾
 
-//------------------------------- Ëã·¨ -------------------------------
+//------------------------------- ç®—æ³• -------------------------------
 
-/*½«ÔÚLbÖĞ²»ÔÚLaÖĞµÄÔªËØ²åÈëµ½La*/
+/*å°†åœ¨Lbä¸­ä¸åœ¨Laä¸­çš„å…ƒç´ æ’å…¥åˆ°La*/
 void Union(SqList *La, SqList Lb);
 
-/*ÒÑÖªlaºÍlbµÄÔªËØ°´·Çµİ¼õÅÅÁĞ
- *¹é²¢laºÍlbµ½lc£¬lcÒ²°´·Çµİ¼õÅÅÁĞ
+/*å·²çŸ¥laå’Œlbçš„å…ƒç´ æŒ‰éé€’å‡æ’åˆ—
+ *å½’å¹¶laå’Œlbåˆ°lcï¼Œlcä¹ŸæŒ‰éé€’å‡æ’åˆ—
 */
 void MergeList(SqList La, SqList Lb, SqList *Lc);
 
-/*É¾³ı±íÖĞËùÓĞÖµÎªxµÄÔªËØ
-Ê±¼ä¸´ÔÓ¶ÈO(n), ¿Õ¼ä¸´ÔÓ¶ÈO(1)*/
+/*åˆ é™¤è¡¨ä¸­æ‰€æœ‰å€¼ä¸ºxçš„å…ƒç´ 
+æ—¶é—´å¤æ‚åº¦O(n), ç©ºé—´å¤æ‚åº¦O(1)*/
 void DeleteElem(SqList *L, ElemType x);
 
-/*É¾³ı±íÖĞËùÓĞÖµ´óÓÚminkÇÒĞ¡ÓÚmaxkµÄÔªËØ*/
+/*åˆ é™¤è¡¨ä¸­æ‰€æœ‰å€¼å¤§äºminkä¸”å°äºmaxkçš„å…ƒç´ */
 Status DeleteBetween_min_max(SqList *L, ElemType mink, ElemType maxk);    
 
-/*É¾³ı±íÖĞËùÓĞÖµÏàÍ¬µÄ¶àÓàÔªËØ*/
+/*åˆ é™¤è¡¨ä¸­æ‰€æœ‰å€¼ç›¸åŒçš„å¤šä½™å…ƒç´ */
 void DeleteEqualElem(SqList *L); 
 
 #endif

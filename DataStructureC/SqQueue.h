@@ -6,7 +6,7 @@
 #define MAX_SIZE 100
 #define ElemType int
 
-//循环队列
+//寰幆闃熷垪
 typedef struct
 {
 	ElemType *base;
@@ -14,7 +14,7 @@ typedef struct
 	int rear;
 }SqQueue;
 
-//------------------------------  函数声明 ----------------------------
+//------------------------------  鍑芥暟澹版槑 ----------------------------
 
 Status InitQueue(SqQueue *Q);
 Status DestroyQueue(SqQueue *Q);

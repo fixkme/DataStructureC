@@ -17,7 +17,7 @@
 using namespace std;
 
 int v(int e){
-	printf("%d¡¢", e);
+	printf("%d\n", e);
 	return OK;
 }
 

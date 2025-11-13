@@ -5,14 +5,14 @@
 #include "macro.h"
 #define ElemType int
 
-//¶ÓÁĞ½áµã
+//é˜Ÿåˆ—ç»“ç‚¹
 typedef struct  QNode
 {
 	ElemType data;
 	QNode *next;
 }QNode;
 
-//µ¥Á´±í¶ÓÁĞ
+//å•é“¾è¡¨é˜Ÿåˆ—
 typedef struct
 {
 	QNode *front;
@@ -20,7 +20,7 @@ typedef struct
 	int length;
 }LinkQueue;
 
-//------------------------------  º¯ÊıÉùÃ÷ ----------------------------
+//------------------------------  å‡½æ•°å£°æ˜ ----------------------------
 
 Status InitQueue(LinkQueue *Q);
 Status DestroyQueue(LinkQueue *Q);

@@ -12,95 +12,95 @@
 #define VRtype int
 #define InfoType void
 
-typedef enum { DG, DN, UDG, UDN }GraphKind; //ÓĞÏòÍ¼, ÓĞÏòÍø, ÎŞÏòÍ¼, ÎŞÏòÍø
+typedef enum { DG, DN, UDG, UDN }GraphKind; //æœ‰å‘å›¾, æœ‰å‘ç½‘, æ— å‘å›¾, æ— å‘ç½‘
 
-/************* Êı×é±íÊ¾, ÁÚ½Ó¾ØÕó *******************/
+/************* æ•°ç»„è¡¨ç¤º, é‚»æ¥çŸ©é˜µ *******************/
 typedef struct ArcCell{
-    VRtype adj;     //±íÊ¾ÏàÁÚ·ñ£»¶ÔÓÚÍø£¬ÔòÎªÈ¨Öµ
-    InfoType *info; //¸Ã»¡µÄÆäËüĞÅÏ¢
+    VRtype adj;     //è¡¨ç¤ºç›¸é‚»å¦ï¼›å¯¹äºç½‘ï¼Œåˆ™ä¸ºæƒå€¼
+    InfoType *info; //è¯¥å¼§çš„å…¶å®ƒä¿¡æ¯
 }ArcCell, AdjMatrix[MAX_VERTEX_NUM][MAX_VERTEX_NUM];
 
 typedef struct {
-    VertexType vexs[MAX_VERTEX_NUM]; //¶¥µãÏòÁ¿
-    AdjMatrix arcs;                  //ÁÚ½Ó¾ØÕó
+    VertexType vexs[MAX_VERTEX_NUM]; //é¡¶ç‚¹å‘é‡
+    AdjMatrix arcs;                  //é‚»æ¥çŸ©é˜µ
     int vexnum, arcnum;
     GraphKind kind;
 }MGraph;
 
 
-/************* Á´Ê½´æ´¢½á¹¹, ÁÚ½Ó±í *******************/
+/************* é“¾å¼å­˜å‚¨ç»“æ„, é‚»æ¥è¡¨ *******************/
 typedef struct ArcNode{
-    int adjvex;             //¸Ã»¡Ö¸Ïò¶¥µãµÄÎ»ÖÃ£¬ÕâÀïÊÇÊı×éÏÂ±ê£¬Ò²¿ÉÒÔÊÇÖ¸ÕëÀàĞÍ
-    struct ArcNode *nextarc;//Ö¸ÏòÏÂÒ»¸öÁÚ½Ó¶¥µãµÄ»¡
+    int adjvex;             //è¯¥å¼§æŒ‡å‘é¡¶ç‚¹çš„ä½ç½®ï¼Œè¿™é‡Œæ˜¯æ•°ç»„ä¸‹æ ‡ï¼Œä¹Ÿå¯ä»¥æ˜¯æŒ‡é’ˆç±»å‹
+    struct ArcNode *nextarc;//æŒ‡å‘ä¸‹ä¸€ä¸ªé‚»æ¥é¡¶ç‚¹çš„å¼§
     InfoType *info;
 }ArcNode;
 
 typedef struct VNode{
-    VertexType data;    //¶¥µãĞÅÏ¢
-    ArcNode *firstarc;  //Ö¸ÏòµÚÒ»Ìõ»¡
+    VertexType data;    //é¡¶ç‚¹ä¿¡æ¯
+    ArcNode *firstarc;  //æŒ‡å‘ç¬¬ä¸€æ¡å¼§
 }VNode, AdjList[MAX_VERTEX_NUM];
 
 typedef struct {
-    AdjList vertices;   //ÁÚ½Ó±í
+    AdjList vertices;   //é‚»æ¥è¡¨
     int vexnum, arcnum;
     GraphKind kind;
 }ALGraph;
 
 
-/************* ÓĞÏòÍ¼µÄÁíÒ»ÖÖÁ´Ê½´æ´¢½á¹¹£¬Ê®×ÖÁ´±í *******************/
-//Ê®×ÖÁ´±í¿ÉÒÔÀí½âÎªÁÚ½Ó±íºÍÄæÁÚ½Ó±íµÄ½áºÏ
+/************* æœ‰å‘å›¾çš„å¦ä¸€ç§é“¾å¼å­˜å‚¨ç»“æ„ï¼Œåå­—é“¾è¡¨ *******************/
+//åå­—é“¾è¡¨å¯ä»¥ç†è§£ä¸ºé‚»æ¥è¡¨å’Œé€†é‚»æ¥è¡¨çš„ç»“åˆ
 typedef struct ArcBox{
-    int tailvex, headvex;         //¸Ã»¡µÄÎ²ºÍÍ·¶¥µãµÄÎ»ÖÃ
-    struct ArcBox *tlink, *hlink; //Ö¸ÏòÏÂÒ»¸öÁÚ½Ó¶¥µãµÄ»¡
+    int tailvex, headvex;         //è¯¥å¼§çš„å°¾å’Œå¤´é¡¶ç‚¹çš„ä½ç½®
+    struct ArcBox *tlink, *hlink; //æŒ‡å‘ä¸‹ä¸€ä¸ªé‚»æ¥é¡¶ç‚¹çš„å¼§
     InfoType *info;
 }ArcBox;
 
 typedef struct VexNode{
-    VertexType data;            //¶¥µãĞÅÏ¢
-    ArcBox *firstin, *firstout; //Ö¸ÏòµÚÒ»ÌõÈë»¡ºÍ³ö»¡
+    VertexType data;            //é¡¶ç‚¹ä¿¡æ¯
+    ArcBox *firstin, *firstout; //æŒ‡å‘ç¬¬ä¸€æ¡å…¥å¼§å’Œå‡ºå¼§
 }VexNode;
 
 typedef struct {
-    VexNode xlist[MAX_VERTEX_NUM]; //Ê®×ÖÁ´±í
+    VexNode xlist[MAX_VERTEX_NUM]; //åå­—é“¾è¡¨
     int vexnum, arcnum;
 }OLGraph;
 
 
-/************* ÎŞÏòÍ¼µÄÁíÒ»ÖÖÁ´Ê½´æ´¢½á¹¹£¬ÁÚ½Ó¶àÖØ±í *******************/
+/************* æ— å‘å›¾çš„å¦ä¸€ç§é“¾å¼å­˜å‚¨ç»“æ„ï¼Œé‚»æ¥å¤šé‡è¡¨ *******************/
 typedef enum { unvisited, visited }VisitIf;
 typedef struct EBox{
-    VisitIf visit;              //·ÃÎÊ±ê¼Ç
-    int ivex, jvex;             //¸Ã±ßÒÀ¸½µÄÁ½¸ö¶¥µãµÄÎ»ÖÃ
-    struct EBox *ilink, *jlink; //·Ö±ğÖ¸ÏòÒÀ¸½ÕâÁ½¸ö¶¥µãµÄÏÂÒ»Ìõ±ß
+    VisitIf visit;              //è®¿é—®æ ‡è®°
+    int ivex, jvex;             //è¯¥è¾¹ä¾é™„çš„ä¸¤ä¸ªé¡¶ç‚¹çš„ä½ç½®
+    struct EBox *ilink, *jlink; //åˆ†åˆ«æŒ‡å‘ä¾é™„è¿™ä¸¤ä¸ªé¡¶ç‚¹çš„ä¸‹ä¸€æ¡è¾¹
     InfoType *info;
 }EBox;
 
 typedef struct VexBox{
-    VertexType data;    //¶¥µãĞÅÏ¢
-    ArcNode *firsedge;  //Ö¸ÏòµÚÒ»Ìõ±ß
+    VertexType data;    //é¡¶ç‚¹ä¿¡æ¯
+    ArcNode *firsedge;  //æŒ‡å‘ç¬¬ä¸€æ¡è¾¹
 }VexBox;
 
 typedef struct {
-    VexBox adjmulist[MAX_VERTEX_NUM];   //ÁÚ½Ó¶àÖØ±í
+    VexBox adjmulist[MAX_VERTEX_NUM];   //é‚»æ¥å¤šé‡è¡¨
     int vexnum, arcnum;
 }AMLGraph;
 
 
 
 
-/******************* ³£ÓÃº¯Êı *******************/
+/******************* å¸¸ç”¨å‡½æ•° *******************/
 int FirstAdjVex(ALGraph G, int v);
 int NextAdjVex(ALGraph G, int v, int w);
 void FindIndegree(ALGraph G, int indegree[MAX_VERTEX_NUM]);
 
-/******************* Éî¶ÈÓÅÏÈËÑË÷ *******************/
-bool visited[MAX_VERTEX_NUM]; //È«¾Ö±äÁ¿
-Status (*VisitFunc)(VertexType);//È«¾Ö±äÁ¿
+/******************* æ·±åº¦ä¼˜å…ˆæœç´¢ *******************/
+bool visited[MAX_VERTEX_NUM]; //å…¨å±€å˜é‡
+Status (*VisitFunc)(VertexType);//å…¨å±€å˜é‡
 void DFSTraverse(ALGraph G, Status (*visit)(int))
 {
     VisitFunc = visit;
     for (int v=0; v < G.vexnum; v++)
-        visited[i] = false;
+        visited[v] = false;
     for (int v=0; v < G.vexnum; v++){
         if (!visited[v])
             DFS(G, v);
@@ -111,13 +111,13 @@ void DFS(ALGraph G, int v)
     visited[v] = true;
     VisitFunc(v);
     for (int w = FirstAdjVex(G, v); w >= 0; w = NextAdjVex(G, v, w)){
-        if (!visited[i])
+        if (!visited[w])
             DFS(G, w);
     }
 }
 
 
-/******************* ¹ã¶ÈÓÅÏÈËÑË÷ *******************/
+/******************* å¹¿åº¦ä¼˜å…ˆæœç´¢ *******************/
 void BFSTraverse(ALGraph G, Status (*visit)(int))
 {
     LinkQueue Q;InitQueue(&Q);
@@ -127,10 +127,10 @@ void BFSTraverse(ALGraph G, Status (*visit)(int))
         if (!visited[v]){
             EnQueue(&Q, v);
             while(!QueueEmpty(Q)){
-                DeQueue(&Q, &u);
-                visit(u);
-                visited[u] = true;
-                for (int w = FirstAdjVex(G, u); w >= 0; w = NextAdjVex(G, u, w)){
+                DeQueue(&Q, &v);
+                visit(v);
+                visited[v] = true;
+                for (int w = FirstAdjVex(G, v); w >= 0; w = NextAdjVex(G, v, w)){
                     if (!visited[w]){
                         EnQueue(&Q, w);
                     }
@@ -142,19 +142,19 @@ void BFSTraverse(ALGraph G, Status (*visit)(int))
 }
 
 
-/******************* ÍØÆËÅÅĞò *******************/
-///1¡¢ÓÃÁÚ½Ó±í×÷ÎªÓĞÏòÍ¼µÄ´æ´¢½á¹¹
-///2¡¢¸ÃËã·¨¿ÉÒÔÓÃÀ´¼ì²éÓĞÏòÍ¼ÊÇ·ñÓĞ»·
-///3¡¢ÓĞÏòÍ¼ÎŞ»·Ê±£¬¿ÉÒÔÓÃÉî¶ÈÓÅÏÈ±éÀú½øĞĞÍØÆËÅÅĞò£¬´ËÊ±Êä³öÎªÄæÏòµÄÍØÆËÓĞĞòĞòÁĞ
+/******************* æ‹“æ‰‘æ’åº *******************/
+///1ã€ç”¨é‚»æ¥è¡¨ä½œä¸ºæœ‰å‘å›¾çš„å­˜å‚¨ç»“æ„
+///2ã€è¯¥ç®—æ³•å¯ä»¥ç”¨æ¥æ£€æŸ¥æœ‰å‘å›¾æ˜¯å¦æœ‰ç¯
+///3ã€æœ‰å‘å›¾æ— ç¯æ—¶ï¼Œå¯ä»¥ç”¨æ·±åº¦ä¼˜å…ˆéå†è¿›è¡Œæ‹“æ‰‘æ’åºï¼Œæ­¤æ—¶è¾“å‡ºä¸ºé€†å‘çš„æ‹“æ‰‘æœ‰åºåºåˆ—
 Status TopoLogicalSort(ALGraph G)
-{   //ÓĞ»··µ»ØERROR£¬ÎŞ»·Êä³öÍØÆËĞòÁĞ
+{   //æœ‰ç¯è¿”å›ERRORï¼Œæ— ç¯è¾“å‡ºæ‹“æ‰‘åºåˆ—
     SqStack S;InitStack(&S);
     int indegree[MAX_VERTEX_NUM];
     FindIndegree(G, indegree);
     for (int i=0; i < G.vexnum; i++)
         if (indegree[i] == 0)
             Push(&S, i);
-    int count = 0; //ÒÑ¾­Êä³öµÄÍØÆËĞòÁĞ¶¥µãÊı
+    int count = 0; //å·²ç»è¾“å‡ºçš„æ‹“æ‰‘åºåˆ—é¡¶ç‚¹æ•°
     int v;
     while (!StackEmpty(S)){
         Pop(&S, &v);
@@ -163,7 +163,7 @@ Status TopoLogicalSort(ALGraph G)
         for (ArcNode *p = G.vertices[v].firstarc; p; p = p->nextarc){
             int k = p->adjvex;
             if (!(--indegree[k])){
-                Push(&S, &k);
+                Push(&S, k);
             }
         }
     }

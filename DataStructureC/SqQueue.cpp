@@ -3,7 +3,7 @@
 #include"SqQueue.h"
 
 
-//¹¹ÔìĞÂÑ­»·¶ÓÁĞ
+//æ„é€ æ–°å¾ªç¯é˜Ÿåˆ—
 Status InitQueue(SqQueue *Q)
 {
 	Q->base = (ElemType*)malloc(sizeof(ElemType)*MAX_SIZE);
@@ -12,7 +12,7 @@ Status InitQueue(SqQueue *Q)
 	Q->front = Q->rear = 0;
 	return OK;
 }
-//Ïú»Ù¶ÓÁĞ
+//é”€æ¯é˜Ÿåˆ—
 Status DestroyQueue(SqQueue *Q)
 {
 	if (!Q->base)
@@ -20,7 +20,7 @@ Status DestroyQueue(SqQueue *Q)
 	free(Q->base);
 	return OK;
 }
-//Çå³ı¶ÓÁĞ
+//æ¸…é™¤é˜Ÿåˆ—
 Status ClearQueue(SqQueue *Q)
 {
 	if (!Q->base)
@@ -28,20 +28,20 @@ Status ClearQueue(SqQueue *Q)
 	Q->rear = Q->front = 0;
 	return OK;
 }
-//¶ÓÁĞÊÇ·ñÎª¿Õ
+//é˜Ÿåˆ—æ˜¯å¦ä¸ºç©º
 Status QueueEmpty(SqQueue Q)
 {
-	if (Q.front == Q.rear) //Ñ­»·¶ÓÁĞ¿Õ
+	if (Q.front == Q.rear) //å¾ªç¯é˜Ÿåˆ—ç©º
 		return TRUE;
 	else
 		return FALSE;
 }
-//Ñ­»·¶ÓÁĞ³¤¶È£¬ÔªËØ¸öÊı
+//å¾ªç¯é˜Ÿåˆ—é•¿åº¦ï¼Œå…ƒç´ ä¸ªæ•°
 int QueueLength(SqQueue Q)
 {
-	return (Q.rear - Q.front + MAX_SIZE) % MAX_SIZE; //Ñ­»·¶ÓÁĞ³¤¶È¼ÆËã
+	return (Q.rear - Q.front + MAX_SIZE) % MAX_SIZE; //å¾ªç¯é˜Ÿåˆ—é•¿åº¦è®¡ç®—
 }
-//ÓÃe·µ»Ø¶ÓÍ·ÔªËØ
+//ç”¨eè¿”å›é˜Ÿå¤´å…ƒç´ 
 Status GetHead(SqQueue Q, ElemType *e)
 {
 	if (Q.front == Q.rear)
@@ -49,25 +49,25 @@ Status GetHead(SqQueue Q, ElemType *e)
 	*e = Q.base[Q.front];
 	return OK;
 }
-//Èë¶Ó
+//å…¥é˜Ÿ
 Status EnQueue(SqQueue *Q, ElemType e)
 {
-	if ((Q->rear + 1) % MAX_SIZE == Q->front) //Ñ­»·¶ÓÁĞÂú
+	if ((Q->rear + 1) % MAX_SIZE == Q->front) //å¾ªç¯é˜Ÿåˆ—æ»¡
 		return ERROR;
 	Q->base[Q->rear] = e;
-	Q->rear = (Q->rear + 1) % MAX_SIZE;  //¸üĞÂQ.rear
+	Q->rear = (Q->rear + 1) % MAX_SIZE;  //æ›´æ–°Q.rear
 	return OK;
 }
-//³ö¶Ó
+//å‡ºé˜Ÿ
 Status DeQueue(SqQueue *Q, ElemType *e)
 {
-	if (Q->front == Q->rear) //Ñ­»·¶ÓÁĞ¿Õ
+	if (Q->front == Q->rear) //å¾ªç¯é˜Ÿåˆ—ç©º
 		return ERROR;
 	*e = Q->base[Q->front];
-	Q->front = (Q->front + 1) % MAX_SIZE;  //¸üĞÂQ.front
+	Q->front = (Q->front + 1) % MAX_SIZE;  //æ›´æ–°Q.front
 	return OK;
 }
-//±éÀú¶ÓÁĞ
+//éå†é˜Ÿåˆ—
 Status QueueTraverce(SqQueue Q, void(*visit)(ElemType))
 {
 	int i = Q.front;

@@ -3,9 +3,9 @@
 
 #include "LinkQueue.h"
 
-//------------------------------  º¯ÊıÉùÃ÷ ----------------------------
+//------------------------------  å‡½æ•°å£°æ˜ ----------------------------
 
-//¹¹ÔìĞÂ¶ÓÁĞ
+//æ„é€ æ–°é˜Ÿåˆ—
 Status InitQueue(LinkQueue *Q)
 {
 	Q->front = Q->rear = (QNode *)malloc(sizeof(QNode));
@@ -14,7 +14,7 @@ Status InitQueue(LinkQueue *Q)
 	Q->front->next = NULL;
 	return OK;
 }
-//Ïú»Ù¶ÓÁĞ
+//é”€æ¯é˜Ÿåˆ—
 Status DestroyQueue(LinkQueue *Q)
 {
 	while (Q->front){
@@ -24,7 +24,7 @@ Status DestroyQueue(LinkQueue *Q)
 	}
 	return OK;
 }
-//Çå³ı¶ÓÁĞ
+//æ¸…é™¤é˜Ÿåˆ—
 Status ClearQueue(LinkQueue *Q)
 {
 	QNode *p = Q->front->next;
@@ -36,7 +36,7 @@ Status ClearQueue(LinkQueue *Q)
 	Q->rear = Q->front;
 	return OK;
 }
-//¶ÓÁĞÊÇ·ñÎª¿Õ
+//é˜Ÿåˆ—æ˜¯å¦ä¸ºç©º
 Status QueueEmpty(LinkQueue Q)
 {
 	if (Q.front == Q.rear)
@@ -44,12 +44,12 @@ Status QueueEmpty(LinkQueue Q)
 	else
 		return FALSE;
 }
-//¶ÓÁĞ³¤¶È£¬ÔªËØ¸öÊı
+//é˜Ÿåˆ—é•¿åº¦ï¼Œå…ƒç´ ä¸ªæ•°
 int QueueLength(LinkQueue Q)
 {
 	return Q.length;
 }
-//ÓÃe·µ»Ø¶ÓÍ·ÔªËØ
+//ç”¨eè¿”å›é˜Ÿå¤´å…ƒç´ 
 Status GetHead(LinkQueue Q, ElemType *e)
 {
 	if (Q.front == Q.rear)
@@ -57,7 +57,7 @@ Status GetHead(LinkQueue Q, ElemType *e)
 	*e = Q.front->next->data;
 	return OK;
 }
-//Èë¶Ó
+//å…¥é˜Ÿ
 Status EnQueue(LinkQueue *Q, ElemType e)
 {
 	QNode *p = (QNode*)malloc(sizeof(QNode));
@@ -69,7 +69,7 @@ Status EnQueue(LinkQueue *Q, ElemType e)
 	Q->rear = p;
 	return OK;
 }
-//³ö¶Ó
+//å‡ºé˜Ÿ
 Status DeQueue(LinkQueue *Q, ElemType *e)
 {
 	if (Q->front == Q->rear)
@@ -82,7 +82,7 @@ Status DeQueue(LinkQueue *Q, ElemType *e)
 	free(p);
 	return OK;
 }
-//±éÀú¶ÓÁĞ
+//éå†é˜Ÿåˆ—
 Status QueueTraverce(LinkQueue Q, void(*visit)(ElemType))
 {
 	QNode *p = Q.front->next;
@@ -90,6 +90,6 @@ Status QueueTraverce(LinkQueue Q, void(*visit)(ElemType))
 		visit(p->data);
 		p = p->next;
 	}
-	printf("; %d¸öÔªËØ\n", Q.length);
+	printf("; %dä¸ªå…ƒç´ \n", Q.length);
 	return OK;
 }

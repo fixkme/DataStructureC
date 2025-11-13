@@ -1,14 +1,14 @@
-//BTree.cpp Ö÷º¯Êı
+//BTree.cpp ä¸»å‡½æ•°
 
 #include "BTree.h"
 #include <stack>
 #include <queue>
 #include <string>
 
-//²ã´Î¹¹Ôì¶ş²æÊ÷
+//å±‚æ¬¡æ„é€ äºŒå‰æ ‘
 BTreeNode* CreateBitTree()
 {
-	puts("²ã´ÎË³ĞòÊäÈë½Úµã£º");
+	puts("å±‚æ¬¡é¡ºåºè¾“å…¥èŠ‚ç‚¹ï¼š");
 	TElemType e;
 	TElemType non = '#';
 	BTreeNode *T=NULL, *p = NULL, *l = NULL, *r = NULL;
@@ -23,7 +23,7 @@ BTreeNode* CreateBitTree()
 		q.push(T);
 		while (!q.empty()){
 
-			//×óº¢×Ó
+			//å·¦å­©å­
 			e = getchar();
 			if (e == non)
 				l = NULL;
@@ -33,7 +33,7 @@ BTreeNode* CreateBitTree()
 				l->data = e;
 				q.push(l);
 			}
-			//ÓÒº¢×Ó
+			//å³å­©å­
 			e = getchar();
 			if (e == non)
 				r = NULL;
@@ -51,7 +51,7 @@ BTreeNode* CreateBitTree()
 	return T;
 }
 
-//¹¹Ôì¶ş²æÅÅĞòÊ÷
+//æ„é€ äºŒå‰æ’åºæ ‘
 BTreeNode* CreateBitSortTree()
 {
 	BTreeNode *T = NULL, *p = NULL, *pt = NULL, *newNode = NULL;
@@ -85,7 +85,7 @@ BTreeNode* CreateBitSortTree()
 	return T;
 }
 
-//×óÓÒ¸ùÏú»Ù¶ş²æÊ÷
+//å·¦å³æ ¹é”€æ¯äºŒå‰æ ‘
 Status DestroyBitTree(BTreeNode *T)
 {
 	if (T){
@@ -97,7 +97,7 @@ Status DestroyBitTree(BTreeNode *T)
 	}
 	return OK;
 }
-//µİ¹éÇ°Ğò±éÀú¶ş²æÊ÷
+//é€’å½’å‰åºéå†äºŒå‰æ ‘
 Status PreOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)) 
 {
 	if (T){
@@ -109,7 +109,7 @@ Status PreOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 	}
 	return OK;
 }
-//µİ¹éÖĞĞò±éÀú¶ş²æÊ÷
+//é€’å½’ä¸­åºéå†äºŒå‰æ ‘
 Status InOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 {
 	if (T){
@@ -122,7 +122,7 @@ Status InOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 	return OK;
 }
 
-//µİ¹éºóĞò±éÀú¶ş²æÊ÷
+//é€’å½’ååºéå†äºŒå‰æ ‘
 Status PostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 {
 	if (T){
@@ -135,13 +135,13 @@ Status PostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 	return OK;
 }
 
-//µİ¹é²ã´Î±éÀú¶ş²æÊ÷
+//é€’å½’å±‚æ¬¡éå†äºŒå‰æ ‘ï¼› ä¸æ¨è
 Status LevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 {
     return OK;
 }
 
-//·Çµİ¹éÇ°Ğò±éÀú¶ş²æÊ÷
+//éé€’å½’å‰åºéå†äºŒå‰æ ‘
 Status RPreOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 {
 	BTreeNode *p = T;
@@ -157,7 +157,7 @@ Status RPreOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 	}
 	return OK;
 }
-//·Çµİ¹éÖĞĞò±éÀú¶ş²æÊ÷
+//éé€’å½’ä¸­åºéå†äºŒå‰æ ‘
 Status RInOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 {
 	std::stack<BTreeNode *> S;
@@ -178,14 +178,14 @@ Status RInOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 	return OK;
 }
 
-
-Status RPostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)) //·Çµİ¹éºóĞò±éÀú¶ş²æÊ÷
+//éé€’å½’ååºéå†äºŒå‰æ ‘
+Status RPostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 {
 
 	return OK;
 }
 
-//·Çµİ¹é²ã´Î±éÀú¶ş²æÊ÷
+//éé€’å½’å±‚æ¬¡éå†äºŒå‰æ ‘
 Status RLevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 {
 	std::queue<BTreeNode*> q;
@@ -205,16 +205,16 @@ Status RLevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 	}
 	return OK;
 }
-//Çó¶ş²æÊ÷µÄÉî¶È
+//æ±‚äºŒå‰æ ‘çš„æ·±åº¦
 int Deep(BTreeNode *T)
 {
-	int n;
 	if (!T)
 		return 0;
 	else{
-        n = Deep(T->lchild);
-        if (n < Deep(T->rchild))
-            n = Deep(T->rchild);
+        int n = Deep(T->lchild);
+		int m = Deep(T->rchild);
+        if (n < m)
+            n = m;
 		return n + 1;
 	}
 }

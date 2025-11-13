@@ -7,14 +7,14 @@
 #define MAX_SIZE 100
 #define ElemType int
 
-//Á´±í½áµã
+//é“¾è¡¨ç»“ç‚¹
 typedef struct  LNode
 {
 	ElemType data;
 	LNode *next;
 }LNode, pos;
 
-//µ¥Á´±í
+//å•é“¾è¡¨
 typedef struct
 {
 	LNode *head;
@@ -22,46 +22,46 @@ typedef struct
 	int length;
 }LinkList;
 
-//------------------------------  º¯ÊıÉùÃ÷ ----------------------------
+//------------------------------  å‡½æ•°å£°æ˜ ----------------------------
 
-Status InitList(LinkList *L);  //³õÊ¼»¯Ò»¸ö±í
-Status DestroyList(LinkList *L); //Ïú»Ù
-int ListEmpty(LinkList L); //ÊÇ·ñÎª¿Õ±í
-Status ClearList(LinkList *L);  //ÖØÖÃÎª¿Õ±í
-int ListLength(LinkList L); //·µ»ØLµÄÔªËØ¸öÊı
-Status GetElem(LinkList L, int i, ElemType *e); //·µ»ØLµÚi£¨i>=1£©¸öÔªËØ
-Status ListInsert(LinkList *L, int i, ElemType e); //²åÈëµÚi¸öÔªËØ£¬
-Status ListDelete(LinkList *L, int i, ElemType* e);//É¾³ıµÚi¸öÔªËØ£¬  ÓÃe·µ»Ø
-Status ListTraverse(LinkList L, void(*visit)(ElemType)); //±éÀúË³Ğò±í
-Status NextElem(LinkList L, ElemType cur_e, ElemType *next_e); //·µ»Øcur_eµÄºó¼Ì
-Status PriorElem(LinkList L, ElemType cur_e, ElemType *pre_e); //·µ»Øcur_eµÄÇ°Çı
-int LocateElem(LinkList L, ElemType e, bool (*func)(ElemType, ElemType));//ÅĞ¶ÏeºÍLµÄÔªËØµÄ¹ØÏµ
-
-
-Status MakeNode(LNode &p, ElemType e); //·ÖÅäÓÉpÖ¸ÏòµÄÖµÎªeµÄ½áµã£¬²¢·µ»ØOK£»·ÖÅäÊ§°Ü·µ»ØERROR
-void freeNode(LNode &p); //ÊÍ·ÅpËùÖ¸½áµã
-Status InsertFirst(LNode *head, LNode *node); //½«node²åÈëµÚÒ»¸ö½áµãÖ®Ç°
-Status InsertBefore(LinkList *L, LNode *p, LNode *s); //pÊôÓÚL£¬ ½«s²åÈëpÖ®Ç°
-Status InsertAfter(LinkList *L, LNode *p, LNode *s); //pÊôÓÚL£¬ ½«s²åÈëpÖ®ºó
-Status Append(LinkList *L, LNode *p); //ÔÚÄ©Î²Ìí¼Óp
-Status DeleteFirst(LNode *head, LNode *q); //É¾³ıµÚÒ»¸ö½áµã£¬ÓÃq·µ»Ø
-Status Remove(LinkList *L, LNode *q); //É¾³ıÄ©Î²½áµã£¬ÓÃq·µ»Ø
+Status InitList(LinkList *L);  //åˆå§‹åŒ–ä¸€ä¸ªè¡¨
+Status DestroyList(LinkList *L); //é”€æ¯
+int ListEmpty(LinkList L); //æ˜¯å¦ä¸ºç©ºè¡¨
+Status ClearList(LinkList *L);  //é‡ç½®ä¸ºç©ºè¡¨
+int ListLength(LinkList L); //è¿”å›Lçš„å…ƒç´ ä¸ªæ•°
+Status GetElem(LinkList L, int i, ElemType *e); //è¿”å›Lç¬¬iï¼ˆi>=1ï¼‰ä¸ªå…ƒç´ 
+Status ListInsert(LinkList *L, int i, ElemType e); //æ’å…¥ç¬¬iä¸ªå…ƒç´ ï¼Œ
+Status ListDelete(LinkList *L, int i, ElemType* e);//åˆ é™¤ç¬¬iä¸ªå…ƒç´ ï¼Œ  ç”¨eè¿”å›
+Status ListTraverse(LinkList L, void(*visit)(ElemType)); //éå†é¡ºåºè¡¨
+Status NextElem(LinkList L, ElemType cur_e, ElemType *next_e); //è¿”å›cur_eçš„åç»§
+Status PriorElem(LinkList L, ElemType cur_e, ElemType *pre_e); //è¿”å›cur_eçš„å‰é©±
+int LocateElem(LinkList L, ElemType e, bool (*func)(ElemType, ElemType));//åˆ¤æ–­eå’ŒLçš„å…ƒç´ çš„å…³ç³»
 
 
-//------------------------------- Ëã·¨ -------------------------------
+Status MakeNode(LNode &p, ElemType e); //åˆ†é…ç”±pæŒ‡å‘çš„å€¼ä¸ºeçš„ç»“ç‚¹ï¼Œå¹¶è¿”å›OKï¼›åˆ†é…å¤±è´¥è¿”å›ERROR
+void freeNode(LNode &p); //é‡Šæ”¾pæ‰€æŒ‡ç»“ç‚¹
+Status InsertFirst(LNode *head, LNode *node); //å°†nodeæ’å…¥ç¬¬ä¸€ä¸ªç»“ç‚¹ä¹‹å‰
+Status InsertBefore(LinkList *L, LNode *p, LNode *s); //på±äºLï¼Œ å°†sæ’å…¥pä¹‹å‰
+Status InsertAfter(LinkList *L, LNode *p, LNode *s); //på±äºLï¼Œ å°†sæ’å…¥pä¹‹å
+Status Append(LinkList *L, LNode *p); //åœ¨æœ«å°¾æ·»åŠ p
+Status DeleteFirst(LNode *head, LNode *q); //åˆ é™¤ç¬¬ä¸€ä¸ªç»“ç‚¹ï¼Œç”¨qè¿”å›
+Status Remove(LinkList *L, LNode *q); //åˆ é™¤æœ«å°¾ç»“ç‚¹ï¼Œç”¨qè¿”å›
 
-/*½«ÔÚLbÖĞ²»ÔÚLaÖĞµÄÔªËØ²åÈëµ½La*/
+
+//------------------------------- ç®—æ³• -------------------------------
+
+/*å°†åœ¨Lbä¸­ä¸åœ¨Laä¸­çš„å…ƒç´ æ’å…¥åˆ°La*/
 void Union(LinkList *La, LinkList Lb);
 
-/*ÒÑÖªlaºÍlbµÄÔªËØ°´·Çµİ¼õÅÅÁĞ
-*¹é²¢laºÍlbµ½lc£¬lcÒ²°´·Çµİ¼õÅÅÁĞ
+/*å·²çŸ¥laå’Œlbçš„å…ƒç´ æŒ‰éé€’å‡æ’åˆ—
+*å½’å¹¶laå’Œlbåˆ°lcï¼Œlcä¹ŸæŒ‰éé€’å‡æ’åˆ—
 */
 void MergeList(LinkList La, LinkList Lb, LinkList *Lc);
 
-/*É¾³ı±íÖĞËùÓĞÖµ´óÓÚminkÇÒĞ¡ÓÚmaxkµÄÔªËØ*/
+/*åˆ é™¤è¡¨ä¸­æ‰€æœ‰å€¼å¤§äºminkä¸”å°äºmaxkçš„å…ƒç´ */
 Status DeleteBetween_min_max(LinkList *L, ElemType mink, ElemType maxk);
 
-//É¾³ı±íÖĞËùÓĞÖµÏàÍ¬µÄ¶àÓàÔªËØ*/
+//åˆ é™¤è¡¨ä¸­æ‰€æœ‰å€¼ç›¸åŒçš„å¤šä½™å…ƒç´ */
 void DeleteEqualElem(LinkList *L);
 
 #endif

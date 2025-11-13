@@ -7,9 +7,9 @@
 #define TElemType int
 #define MAX_TREE_SIZE 100
 
-/**************************** ¶ş²æÊ÷ ***************************/
+/**************************** äºŒå‰æ ‘ ***************************/
 
-//¶ş²æÊ÷½Úµã
+//äºŒå‰æ ‘èŠ‚ç‚¹
 typedef struct BTreeNode
 {
 	TElemType data;
@@ -17,31 +17,31 @@ typedef struct BTreeNode
 	BTreeNode *rchild;
 }BTreeNode;
 
-//¸÷º¯ÊıÉùÃ÷
+//å„å‡½æ•°å£°æ˜
 
-BTreeNode* CreateBitTree();										//²ã´Î¹¹Ôì¶ş²æÊ÷
-Status DestroyBitTree(BTreeNode *T);							//Ïú»Ù¶ş²æÊ÷
-Status PreOrderTraverse(BTreeNode *T, Status (*visit)(TElemType)); //µİ¹éÇ°Ğò±éÀú¶ş²æÊ÷
-Status InOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //µİ¹éÖĞĞò±éÀú¶ş²æÊ÷
-Status PostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //µİ¹éºóĞò±éÀú¶ş²æÊ÷
-Status LevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //µİ¹é²ã´Î±éÀú¶ş²æÊ÷
-Status RPreOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //·Çµİ¹éÇ°Ğò±éÀú¶ş²æÊ÷
-Status RInOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //·Çµİ¹éÖĞĞò±éÀú¶ş²æÊ÷
-Status RPostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //·Çµİ¹éºóĞò±éÀú¶ş²æÊ÷
-Status RLevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //·Çµİ¹é²ã´Î±éÀú¶ş²æÊ÷
-int Deep(BTreeNode *T);											//Çó¶ş²æÊ÷µÄÉî¶È
+BTreeNode* CreateBitTree();										//å±‚æ¬¡æ„é€ äºŒå‰æ ‘
+Status DestroyBitTree(BTreeNode *T);							//é”€æ¯äºŒå‰æ ‘
+Status PreOrderTraverse(BTreeNode *T, Status (*visit)(TElemType)); //é€’å½’å‰åºéå†äºŒå‰æ ‘
+Status InOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //é€’å½’ä¸­åºéå†äºŒå‰æ ‘
+Status PostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //é€’å½’ååºéå†äºŒå‰æ ‘
+Status LevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //é€’å½’å±‚æ¬¡éå†äºŒå‰æ ‘
+Status RPreOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //éé€’å½’å‰åºéå†äºŒå‰æ ‘
+Status RInOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //éé€’å½’ä¸­åºéå†äºŒå‰æ ‘
+Status RPostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //éé€’å½’ååºéå†äºŒå‰æ ‘
+Status RLevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //éé€’å½’å±‚æ¬¡éå†äºŒå‰æ ‘
+int Deep(BTreeNode *T);											//æ±‚äºŒå‰æ ‘çš„æ·±åº¦
 
-BTreeNode* CreateBitSortTree();									//¹¹Ôì¶ş²æÅÅĞòÊ÷
+BTreeNode* CreateBitSortTree();									//æ„é€ äºŒå‰æ’åºæ ‘
 
 
-/**************************** ÏßË÷¶ş²æÊ÷ ***************************/
+/**************************** çº¿ç´¢äºŒå‰æ ‘ ***************************/
 typedef enum
 {
-	Link, //Ö¸Õë
-	Thread //ÏßË÷
+	Link, //æŒ‡é’ˆ
+	Thread //çº¿ç´¢
 }Tag;
 
-//ÏßË÷¶ş²æÊ÷½Úµã
+//çº¿ç´¢äºŒå‰æ ‘èŠ‚ç‚¹
 typedef struct BiThrNode
 {
 	TElemType data;
@@ -51,11 +51,11 @@ typedef struct BiThrNode
 
 
 
-/**************************** ºÕ·òÂüÊ÷ºÍºÕ·òÂü±àÂëµÄ´æ´¢±íÊ¾ ***************************/
+/**************************** èµ«å¤«æ›¼æ ‘å’Œèµ«å¤«æ›¼ç¼–ç çš„å­˜å‚¨è¡¨ç¤º ***************************/
 
-#define NS 10  //Ò¶×Ó½áµãÊ÷Îª NS£¬×Ü½áµã 2 * NS -1
+#define NS 10  //å¶å­ç»“ç‚¹æ ‘ä¸º NSï¼Œæ€»ç»“ç‚¹ 2 * NS -1
 
-typedef struct  //½áµã
+typedef struct  //ç»“ç‚¹
 {
     unsigned int weight;
     unsigned int parent, lchild, rchild;
@@ -65,15 +65,15 @@ typedef struct  //½áµã
 
 
 
-/**************************** Ê÷µÄË«Ç×±íÊ¾·¨ ***************************/
+/**************************** æ ‘çš„åŒäº²è¡¨ç¤ºæ³• ***************************/
 
-typedef struct PTNode //Ê÷µÄ½áµã
+typedef struct PTNode //æ ‘çš„ç»“ç‚¹
 {
 	TElemType data;
 	int parent;
 }PTNode;
 
-typedef struct		//Ê÷
+typedef struct		//æ ‘
 {
 	PTNode nodes[MAX_TREE_SIZE];
 	int root, num;
@@ -83,21 +83,21 @@ typedef struct		//Ê÷
 
 
 
-/**************************** Ê÷µÄº¢×Ó±íÊ¾·¨ ***************************/
+/**************************** æ ‘çš„å­©å­è¡¨ç¤ºæ³• ***************************/
 
-typedef struct CTNode //º¢×Ó½áµã
+typedef struct CTNode //å­©å­ç»“ç‚¹
 {
-	int child; //º¢×ÓÎ»ÖÃÓò
+	int child; //å­©å­ä½ç½®åŸŸ
 	CTNode *next;
 }CTNode;
 
-typedef struct  //Ê÷µÄ½áµã
+typedef struct  //æ ‘çš„ç»“ç‚¹
 {
 	TElemType data;
 	CTNode *firstChild;
 }CTBox;
 
-typedef struct //Ê÷
+typedef struct //æ ‘
 {
 	CTBox nodes[MAX_TREE_SIZE];
 	int root, num;
@@ -106,9 +106,9 @@ typedef struct //Ê÷
 
 
 
-/**************************** Ê÷µÄº¢×ÓĞÖµÜ±íÊ¾·¨ ***************************/
+/**************************** æ ‘çš„å­©å­å…„å¼Ÿè¡¨ç¤ºæ³• ***************************/
 
-typedef struct CSNode  //Ê÷µÄ½áµã
+typedef struct CSNode  //æ ‘çš„ç»“ç‚¹
 {
 	TElemType data;
 	CSNode *firstChild;

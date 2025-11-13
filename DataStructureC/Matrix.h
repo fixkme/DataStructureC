@@ -23,7 +23,7 @@ typedef struct  //压缩矩阵
 
 //函数声明
 void scan(TSMatrix *M);   //输入压缩矩阵
-void print(TSMatrix *M);   //输出压缩矩阵
+void printTSMatrix(TSMatrix *M);   //输出压缩矩阵
 Triple getELem(TSMatrix M, int i, int j);  //访问元素
 void changeElem(TSMatrix *M, int i, int j, ElemType e); //改变元素值
 void TransposeTSMatrix(TSMatrix M, TSMatrix *T);	 //稀疏矩阵简单转置
@@ -42,7 +42,7 @@ int Matrixtest()     //函数
     //print(&M);
     //TransposeTSMatrix(M, &T);
     FastTransposeTSMatrix(M, &T);
-    print(&T);
+    printTSMatrix(&T);
     return 0;
 }
 

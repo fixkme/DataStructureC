@@ -17,7 +17,7 @@ void scan(TSMatrix *M)   ////输入压缩矩阵
 	}
 }
 
-void print(TSMatrix *M)   //输出压缩矩阵
+void printTSMatrix(TSMatrix *M)   //输出压缩矩阵
 {
 	int n;
 	for (n = 1; n <= M->tu; n++)

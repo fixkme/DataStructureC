@@ -2,7 +2,7 @@
 #include "LinkList.h"
 
 
-//³õÊ¼»¯Ò»¸öË³Ðò±í
+//åˆå§‹åŒ–ä¸€ä¸ªé¡ºåºè¡¨
 Status InitList(LinkList *L)
 {
 	L->head = NULL;
@@ -10,12 +10,12 @@ Status InitList(LinkList *L)
 	L->length = 0;
 	return OK;
 }
-//Ïú»Ù
+//é”€æ¯
 Status DestroyList(LinkList *L)
 {
 	return ClearList(L);
 }
-//ÊÇ·ñÎª¿Õ±í
+//æ˜¯å¦ä¸ºç©ºè¡¨
 int ListEmpty(LinkList L)
 {
 
@@ -24,7 +24,7 @@ int ListEmpty(LinkList L)
 	else
 		return FALSE;
 }
-//ÖØÖÃÎª¿Õ±í
+//é‡ç½®ä¸ºç©ºè¡¨
 Status ClearList(LinkList *L)
 {
 	struct LNode *pt = L->head, *p = NULL;
@@ -41,12 +41,12 @@ Status ClearList(LinkList *L)
 	L->length = 0;
 	return OK;
 }
-//·µ»ØLµÄÔªËØ¸öÊý
+//è¿”å›žLçš„å…ƒç´ ä¸ªæ•°
 int ListLength(LinkList L)
 {
 	return L.length;
 }
-//²åÈëµÚi£¨i>=1£©¸öÔªËØ
+//æ’å…¥ç¬¬iï¼ˆi>=1ï¼‰ä¸ªå…ƒç´ 
 Status ListInsert(LinkList *L, int i, ElemType e)
 {
 	int j, n = L->length;
@@ -78,7 +78,7 @@ Status ListInsert(LinkList *L, int i, ElemType e)
 	L->length++;
 	return OK;
 }
-//É¾³ýµÚi¸öÔªËØ, ÓÃe·µ»Ø
+//åˆ é™¤ç¬¬iä¸ªå…ƒç´ , ç”¨eè¿”å›ž
 Status ListDelete(LinkList *L, int i, ElemType* e)
 {
 	LNode *pt = L->head, *p = NULL;
@@ -101,16 +101,16 @@ Status ListDelete(LinkList *L, int i, ElemType* e)
 	L->length--;
 	return OK;
 }
-//±éÀúË³Ðò±í
+//éåŽ†é¡ºåºè¡¨
 Status ListTraverse(LinkList L, void(*visit)(ElemType))
 {
 	for (LNode* p = L.head; p; p = p->next){
 		visit(p->data);
 	}
-	printf("; %d¸öÔªËØ\n", L.length);
+	printf("; %dä¸ªå…ƒç´ \n", L.length);
 	return OK;
 }
-//·µ»ØLµÚi£¨i>=1£©¸öÔªËØ
+//è¿”å›žLç¬¬iï¼ˆi>=1ï¼‰ä¸ªå…ƒç´ 
 Status GetElem(LinkList L, int i, ElemType *e)
 {
 	if (!L.head)
@@ -124,7 +124,7 @@ Status GetElem(LinkList L, int i, ElemType *e)
 	*e = p->data;
 	return OK;
 }
-//·µ»Øcur_eµÄºó¼Ì
+//è¿”å›žcur_eçš„åŽç»§
 Status NextElem(LinkList L, ElemType cur_e, ElemType *next_e)
 {
 
@@ -136,7 +136,7 @@ Status NextElem(LinkList L, ElemType cur_e, ElemType *next_e)
 	}
 	return INFEASIBLE;
 }
-//·µ»Øcur_eµÄÇ°Çý
+//è¿”å›žcur_eçš„å‰é©±
 Status PriorElem(LinkList L, ElemType cur_e, ElemType *pre_e)
 {
 	LNode* pt = L.head;
@@ -162,7 +162,7 @@ int LocateElem(LinkList L, ElemType e, bool (*func)(ElemType, ElemType))
 
 
 
-//·ÖÅäÓÉpÖ¸ÏòµÄÖµÎªeµÄ½áµã£¬²¢·µ»ØOK£»·ÖÅäÊ§°Ü·µ»ØERROR
+//åˆ†é…ç”±pæŒ‡å‘çš„å€¼ä¸ºeçš„ç»“ç‚¹ï¼Œå¹¶è¿”å›žOKï¼›åˆ†é…å¤±è´¥è¿”å›žERROR
 Status MakeNode(LNode *p, ElemType e){
 	p = (LNode*)malloc(sizeof(LNode));
 	if (!p)
@@ -170,41 +170,41 @@ Status MakeNode(LNode *p, ElemType e){
 	p->data = e;
 	return OK;
 }
-//ÊÍ·ÅpËùÖ¸½áµã
+//é‡Šæ”¾pæ‰€æŒ‡ç»“ç‚¹
 void freeNode(LNode *p)
 {
 	free(p);
 	p = NULL;
 }
-//½«node²åÈëµÚÒ»¸ö½áµãÖ®Ç°
+//å°†nodeæ’å…¥ç¬¬ä¸€ä¸ªç»“ç‚¹ä¹‹å‰
 Status InsertFirst(LNode *head, LNode *node)
 {
 
 	return OK;
 }
-//pÊôÓÚL£¬ ½«s²åÈëpÖ®Ç°
+//på±žäºŽLï¼Œ å°†sæ’å…¥pä¹‹å‰
 Status InsertBefore(LinkList *L, LNode *p, LNode *s)
 {
 	return OK;
 }
-//pÊôÓÚL£¬ ½«s²åÈëpÖ®ºó
+//på±žäºŽLï¼Œ å°†sæ’å…¥pä¹‹åŽ
 Status InsertAfter(LinkList *L, LNode *p, LNode *s)
 {
 	return OK;
 }
-//ÔÚÄ©Î²Ìí¼Óp
+//åœ¨æœ«å°¾æ·»åŠ p
 Status Append(LinkList *L, LNode *p)
 {
 	L->tail->next = p;
 	p->next = NULL;
 	return OK;
 }
-//É¾³ýµÚÒ»¸ö½áµã£¬ÓÃq·µ»Ø
+//åˆ é™¤ç¬¬ä¸€ä¸ªç»“ç‚¹ï¼Œç”¨qè¿”å›ž
 Status DeleteFirst(LNode *head, LNode *q)
 {
 	return OK;
 }
-//É¾³ýÄ©Î²½áµã£¬ÓÃq·µ»Ø
+//åˆ é™¤æœ«å°¾ç»“ç‚¹ï¼Œç”¨qè¿”å›ž
 Status Remove(LinkList *L, LNode *q)
 {
 	return OK;

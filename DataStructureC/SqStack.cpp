@@ -2,9 +2,9 @@
 
 #include"SqStack.h"
 
-/*----------------------------------- ¶¨Òå¸÷¸öº¯Êı -------------------------------*/
+/*----------------------------------- å®šä¹‰å„ä¸ªå‡½æ•° -------------------------------*/
 
-//¹¹ÔìË³ĞòÕ»
+//æ„é€ é¡ºåºæ ˆ
 Status InitStack(SqStack *S)
 {
 	S->base = (ElemType *)malloc(sizeof(ElemType)*(STACK_INIT_SIZE));
@@ -14,7 +14,7 @@ Status InitStack(SqStack *S)
 	S->stacksize = STACK_INIT_SIZE;
 	return OK;
 }
-//Ïú»Ù
+//é”€æ¯
 Status DestroyStack(SqStack *S)
 {
 	if (!S->base)
@@ -25,7 +25,7 @@ Status DestroyStack(SqStack *S)
 	S->stacksize = 0;
 	return OK;
 }
-//ÅĞ¶ÏÊÇ·ñÎª¿Õ
+//åˆ¤æ–­æ˜¯å¦ä¸ºç©º
 Status StackEmpty(SqStack S)
 {
 	if (S.base == S.top)
@@ -33,7 +33,7 @@ Status StackEmpty(SqStack S)
 	else
 		return FALSE;
 }
-//Çå¿ÕÕ»
+//æ¸…ç©ºæ ˆ
 Status ClearStack(SqStack *S)
 {
 	if (!S->base)
@@ -41,12 +41,12 @@ Status ClearStack(SqStack *S)
 	S->top = S->base;
 	return OK;
 }
-//·µ»ØÕ»ÔªËØ¸öÊı,Õ»³¤¶È
+//è¿”å›æ ˆå…ƒç´ ä¸ªæ•°,æ ˆé•¿åº¦
 int StackLength(SqStack S) 
 {
 	return S.top - S.base;
 }
-//Ñ¹ÈëÕ»
+//å‹å…¥æ ˆ
 Status Push(SqStack *S, ElemType e)
 {
 	if (S->top - S->base >= S->stacksize)
@@ -61,7 +61,7 @@ Status Push(SqStack *S, ElemType e)
 	S->top++;
 	return OK;
 }
-//É¾³ıÕ»¶¥ÔªËØ£¬ÓÃe·µ»Ø
+//åˆ é™¤æ ˆé¡¶å…ƒç´ ï¼Œç”¨eè¿”å›
 Status Pop(SqStack *S, ElemType *e) 
 {
 	if (S->base == S->top)
@@ -70,7 +70,7 @@ Status Pop(SqStack *S, ElemType *e)
 	*e = *(S->top);
 	return OK;
 }
-//ÓÃe·µ»ØÕ»¶¥ÔªËØ
+//ç”¨eè¿”å›æ ˆé¡¶å…ƒç´ 
 Status GetTop(SqStack S, ElemType *e)  
 {
 	if (S.base == S.top)
@@ -78,28 +78,28 @@ Status GetTop(SqStack S, ElemType *e)
 	*e = *(S.top);
 	return OK;
 }
-//±éÀúÕ»
+//éå†æ ˆ
 Status StackTraverse(SqStack S, Status (*func)(ElemType))
 {
 	ElemType *p;
 	for (p = S.base; p != S.top; p++){
 		func(*p);
 	}
-	printf("; %d¸öÔªËØ\n", S.top - S.base);
+	printf("; %dä¸ªå…ƒç´ \n", S.top - S.base);
 	return OK;
 }
 
-//------------------- ¸¨Öúº¯Êı ---------------------
+//------------------- è¾…åŠ©å‡½æ•° ---------------------
 
 Status visit(ElemType e){
 	printf("%c", e);
 	return OK;
 }
 
-//------------------- Ëã·¨ --------------------------
+//------------------- ç®—æ³• --------------------------
 
-/*ÊıÖµ×ª»»£¬ Ê®½øÖÆNºÍÆäËûd½øÖÆµÄ×ª»»£¬N = (N div d) * d + N mod d; divÎªÕû³ı£¬ modÇóÓà¡£
-ÊäÈëÈÎÒâ·Ç¸ºÊ®½øÖÆ£¬Êä³öd½øÖÆ
+/*æ•°å€¼è½¬æ¢ï¼Œ åè¿›åˆ¶Nå’Œå…¶ä»–dè¿›åˆ¶çš„è½¬æ¢ï¼ŒN = (N div d) * d + N mod d; divä¸ºæ•´é™¤ï¼Œ modæ±‚ä½™ã€‚
+è¾“å…¥ä»»æ„éè´Ÿåè¿›åˆ¶ï¼Œè¾“å‡ºdè¿›åˆ¶
 **************************************************************************/
 void Conversion(unsigned int N, unsigned int d){
 	ElemType e;
@@ -118,7 +118,7 @@ void Conversion(unsigned int N, unsigned int d){
 	DestroyStack(&s);
 }
 
-/*À¨ºÅÆ¥Åä
+/*æ‹¬å·åŒ¹é…
 ***********************************************************************/
 void BracketMatch(){
 	typedef struct Bracket{
@@ -133,7 +133,7 @@ void BracketMatch(){
 	DestroyStack(&s);
 }
 
-/*ĞĞ±à¼­£»#ÍË¸ñ£¬ @ÍËĞĞ
+/*è¡Œç¼–è¾‘ï¼›#é€€æ ¼ï¼Œ @é€€è¡Œ
 ***********************************************************************/
 void LineEdit(){
 	ElemType ch, e;
@@ -164,36 +164,36 @@ void LineEdit(){
 	DestroyStack(&s);
 }
 
-/*±í´ïÊ½ÇóÖµ£º
-1¡¢ÏÈ³Ë³ıºó¼Ó¼õ
-2¡¢´Ó×óµ½ÓÒ
-3¡¢ÏÈÀ¨ºÅÄÚ£¬ºóÀ¨ºÅÍâ
+/*è¡¨è¾¾å¼æ±‚å€¼ï¼š
+1ã€å…ˆä¹˜é™¤ååŠ å‡
+2ã€ä»å·¦åˆ°å³
+3ã€å…ˆæ‹¬å·å†…ï¼Œåæ‹¬å·å¤–
 ***********************************************************************/
 
-//ÔËËã·ûÓÅÏÈ¼¶±È½Ï
+//è¿ç®—ç¬¦ä¼˜å…ˆçº§æ¯”è¾ƒ
 int precede(OP fore, OP back){
 	return 0;
 }
-//¶şÔªÔËËã
+//äºŒå…ƒè¿ç®—
 ElemType Operate(ElemType fore_num, OP op, ElemType back_num){
 	return fore_num;
 }
-//±í´ïÊ½ÇóÖµ
+//è¡¨è¾¾å¼æ±‚å€¼
 ElemType EvaluateExpression(){
 	ElemType e='\0';
 	return e;
 }
 
-/*ÃÔ¹¬Çó½â
+/*è¿·å®«æ±‚è§£
 ***********************************************************************/
 void MazePath(int map[HEIGHT][WIDTH], Pos startPos, Pos endPos){
 
 }
 
-/*hanoiËşµİ¹é
+/*hanoiå¡”é€’å½’
 *********************************************************************/
 
-//nÎªÔ²ÅÌ×ÜÊı£¬x³õÊ¼Î»ÖÃ£¬y¸¨ÖúÎ»ÖÃ£¬zÄ¿µÄÎ»ÖÃ;½«1µ½n-1ÒÆµ½z
+//nä¸ºåœ†ç›˜æ€»æ•°ï¼Œxåˆå§‹ä½ç½®ï¼Œyè¾…åŠ©ä½ç½®ï¼Œzç›®çš„ä½ç½®;å°†1åˆ°n-1ç§»åˆ°z
 void Hanoi(int n, char x, char y, char z){
 	if (n == 1){
 		move(x, 1, z);
@@ -204,8 +204,8 @@ void Hanoi(int n, char x, char y, char z){
 		Hanoi(n - 1, y, x, z);
 	}
 }
-//½«±àºÅÎªnµÄÔ²ÅÌ´ÓxÒÆµ½z
+//å°†ç¼–å·ä¸ºnçš„åœ†ç›˜ä»xç§»åˆ°z
 void move(char x, int n, char z){
 	static int i = 0;
-	printf("%d: ½«±àºÅÎª %d µÄÔ²ÅÌ´Ó %c ÒÆµ½ %c\n", ++i, n, x, z);
+	printf("%d: å°†ç¼–å·ä¸º %d çš„åœ†ç›˜ä» %c ç§»åˆ° %c\n", ++i, n, x, z);
 }

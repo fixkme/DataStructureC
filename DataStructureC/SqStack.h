@@ -9,7 +9,7 @@
 #include "macro.h"
 
 
-//¶¨ÒåË³ĞòÕ»
+//å®šä¹‰é¡ºåºæ ˆ
 typedef struct SqStack
 {
 	ElemType *base;
@@ -17,38 +17,38 @@ typedef struct SqStack
 	int stacksize;
 }SqStack;
 
-//º¯ÊıÉùÃ÷
+//å‡½æ•°å£°æ˜
 
-Status InitStack(SqStack *S);  //¹¹ÔìË³ĞòÕ»
-Status DestroyStack(SqStack *S); //Ïú»Ù
-Status StackEmpty(SqStack S);  //ÅĞ¶ÏÊÇ·ñÎª¿Õ
-Status ClearStack(SqStack *S);  //Çå¿ÕÕ»
-int StackLength(SqStack S);  //·µ»ØÕ»ÔªËØ¸öÊı
-Status Push(SqStack *S, ElemType e);  //Ñ¹ÈëÕ»
-Status Pop(SqStack *S, ElemType *e); //É¾³ıÕ»¶¥ÔªËØ£¬ÓÃe·µ»Ø
-Status GetTop(SqStack S, ElemType *e);  //ÓÃe·µ»ØÕ»¶¥ÔªËØ
-Status StackTraverse(SqStack S, Status(*func)(ElemType)); //±éÀúÕ»
+Status InitStack(SqStack *S);  //æ„é€ é¡ºåºæ ˆ
+Status DestroyStack(SqStack *S); //é”€æ¯
+Status StackEmpty(SqStack S);  //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+Status ClearStack(SqStack *S);  //æ¸…ç©ºæ ˆ
+int StackLength(SqStack S);  //è¿”å›æ ˆå…ƒç´ ä¸ªæ•°
+Status Push(SqStack *S, ElemType e);  //å‹å…¥æ ˆ
+Status Pop(SqStack *S, ElemType *e); //åˆ é™¤æ ˆé¡¶å…ƒç´ ï¼Œç”¨eè¿”å›
+Status GetTop(SqStack S, ElemType *e);  //ç”¨eè¿”å›æ ˆé¡¶å…ƒç´ 
+Status StackTraverse(SqStack S, Status(*func)(ElemType)); //éå†æ ˆ
 
 
-//------------------------- Ëã·¨ --------------------------
+//------------------------- ç®—æ³• --------------------------
 
-/*ÊıÖµ×ª»»£¬ Ê®½øÖÆNºÍÆäËûd½øÖÆµÄ×ª»»£¬N = (N div d) * d + N mod d; divÎªÕû³ı£¬ modÇóÓà¡£
-ÊäÈëÈÎÒâ·Ç¸ºÊ®½øÖÆ£¬Êä³ö°Ë½øÖÆ
+/*æ•°å€¼è½¬æ¢ï¼Œ åè¿›åˆ¶Nå’Œå…¶ä»–dè¿›åˆ¶çš„è½¬æ¢ï¼ŒN = (N div d) * d + N mod d; divä¸ºæ•´é™¤ï¼Œ modæ±‚ä½™ã€‚
+è¾“å…¥ä»»æ„éè´Ÿåè¿›åˆ¶ï¼Œè¾“å‡ºå…«è¿›åˆ¶
 *********************************************************************/
 void Conversion(unsigned int N, unsigned int d);
 
-/*À¨ºÅÆ¥Åä
+/*æ‹¬å·åŒ¹é…
 *********************************************************************/
 void BracketMatch();
 
-/*ĞĞ±à¼­
+/*è¡Œç¼–è¾‘
 *********************************************************************/
 void LineEdit();
 
-/*±í´ïÊ½ÇóÖµ£º
-1¡¢ÏÈ³Ë³ıºó¼Ó¼õ
-2¡¢´Ó×óµ½ÓÒ
-3¡¢ÏÈÀ¨ºÅÄÚ£¬ºóÀ¨ºÅÍâ
+/*è¡¨è¾¾å¼æ±‚å€¼ï¼š
+1ã€å…ˆä¹˜é™¤ååŠ å‡
+2ã€ä»å·¦åˆ°å³
+3ã€å…ˆæ‹¬å·å†…ï¼Œåæ‹¬å·å¤–
 *********************************************************************/
 
 typedef enum OP
@@ -61,20 +61,20 @@ typedef enum OP
 	divi,
 	leftB
 }OP;
-//ÔËËã·ûÓÅÏÈ¼¶±È½Ï
+//è¿ç®—ç¬¦ä¼˜å…ˆçº§æ¯”è¾ƒ
 int precede(OP fore, OP back);
-//¶şÔªÔËËã
+//äºŒå…ƒè¿ç®—
 ElemType Operate(ElemType fore_num, OP op, ElemType back_num);
-//±í´ïÊ½ÇóÖµ
+//è¡¨è¾¾å¼æ±‚å€¼
 ElemType EvaluateExpression();
 
 
-/* ÃÔ¹¬Çó½â ,0Â·¾¶£¬1Ç½£¬2ÒÑ¾­×ß¹ı
+/* è¿·å®«æ±‚è§£ ,0è·¯å¾„ï¼Œ1å¢™ï¼Œ2å·²ç»èµ°è¿‡
 *********************************************************************/
 
 #define HEIGHT 61
 #define WIDTH 61
-//ËÑË÷µÄ·½Ïò
+//æœç´¢çš„æ–¹å‘
 enum Direction
 {
 	up = 1,
@@ -83,7 +83,7 @@ enum Direction
 	right
 };
 
-//¶¨ÒåÃÔ¹¬Î»ÖÃ
+//å®šä¹‰è¿·å®«ä½ç½®
 typedef struct
 {
 	int x;
@@ -94,12 +94,12 @@ typedef struct
 void MazePath(int map[HEIGHT][WIDTH], Pos startPos, Pos endPos);
 
 
-/*hanoiËşµİ¹é
+/*hanoiå¡”é€’å½’
 *********************************************************************/
 
-//nÎªÔ²ÅÌ×ÜÊı£¬x³õÊ¼Î»ÖÃ£¬y¸¨ÖúÎ»ÖÃ£¬zÄ¿µÄÎ»ÖÃ;½«1µ½n-1ÒÆµ½z
+//nä¸ºåœ†ç›˜æ€»æ•°ï¼Œxåˆå§‹ä½ç½®ï¼Œyè¾…åŠ©ä½ç½®ï¼Œzç›®çš„ä½ç½®;å°†1åˆ°n-1ç§»åˆ°z
 void Hanoi(int n, char x, char y, char z);
-//½«±àºÅÎªnµÄÔ²ÅÌ´ÓxÒÆµ½z
+//å°†ç¼–å·ä¸ºnçš„åœ†ç›˜ä»xç§»åˆ°z
 void move(char x, int n, char z);
 
 #endif

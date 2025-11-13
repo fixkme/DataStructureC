@@ -28,12 +28,12 @@ void InsertSort(vector<int> &vec)
 void Shell(vector<int> &vec, int dlta)
 {
     int j, tmp;
-    for (int i = dlta; i < vec.size(); i += 1)
+    for (int i = dlta; i < vec.size(); i += 1) // 注意：i 每次 +1，不是 +dlta
     {
         if (vec[i] < vec[i-dlta])
         {
             tmp = vec[i];
-            for (j = i-dlta; j < vec.size() && tmp < vec[j]; j -= dlta)
+            for (j = i-dlta; j >=0 && tmp < vec[j]; j -= dlta)
             {
                 vec[j+dlta] = vec[j];
             }
@@ -43,7 +43,7 @@ void Shell(vector<int> &vec, int dlta)
 }
 void ShellSort(vector<int> &vec)
 {
-    //dltas里的值应该为质数，且最后一个必须为1
+    //dltas最后一个必须为1
     vector<int> dltas = {5, 3, 1};
     for (int i=0; i < dltas.size(); i++)
     {
@@ -72,6 +72,7 @@ void BubbleSort(vector<int> &vec)
 
 ///快速排序， 不稳定，时间复杂度O(nlogn)，空间复杂度O(logn)
 /// 1、每次Partition便确定一个数pivot_key的位置，且pivot_key都大于左边的数，都小于右边的数
+/// 2、用于：Quickselect（排序第k的元素、中位数）、top-k(前k个元素)
 int Partition(vector<int> &vec, int low, int high)
 {
     int pivot_key = vec[low];
@@ -101,6 +102,62 @@ void QSort(vector<int> &vec, int low, int high)
 void QuickSort(vector<int> &vec)
 {
     QSort(vec, 0, vec.size()-1);
+}
+
+// 三路分区快排
+void QuickSort3(vector<int>& arr, int low, int high) {
+    if (low >= high) return;
+
+    int lt = low;      // arr[low..lt-1] < pivot
+    int gt = high;     // arr[gt+1..high] > pivot
+    int i = low + 1;   // arr[lt..i-1] == pivot
+    int pivot = arr[low];
+
+    while (i <= gt) {
+        if (arr[i] < pivot) {
+            swap(arr[lt++], arr[i++]);
+        } else if (arr[i] > pivot) {
+            swap(arr[i], arr[gt--]);
+            // 注意：i 不变！因为 arr[i] 是从右边换来的，尚未检查
+        } else {
+            i++;  // arr[i] == pivot，直接跳过
+        }
+    }
+
+    // 此时：
+    // [low, lt-1]   : < pivot
+    // [lt, gt]      : == pivot
+    // [gt+1, high]  : > pivot
+
+    QuickSort3(arr, low, lt - 1);
+    QuickSort3(arr, gt + 1, high);
+}
+
+// Hoare 分区函数
+int HoarePartition(vector<int>& arr, int low, int high) {
+    int pivot = arr[low];  // 选择第一个元素作为基准
+    int i = low - 1;
+    int j = high + 1;
+    
+    while (true) {
+        // 从左向右找到第一个大于等于基准的元素
+        do { i++; } while (arr[i] < pivot);
+        // 从右向左找到第一个小于等于基准的元素
+        do { j--; } while (arr[j] > pivot);
+        // 如果指针相遇或交叉，返回分区位置
+        if (i >= j) { return j; }
+        // 交换元素
+        swap(arr[i], arr[j]);
+    }
+}
+void HoareQuickSort(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        // 获取分区位置
+        int pi = HoarePartition(arr, low, high);
+        // 递归排序分区
+        HoareQuickSort(arr, low, pi);      // 注意：这里包含分区位置
+        HoareQuickSort(arr, pi + 1, high);
+    }
 }
 
 
@@ -140,11 +197,10 @@ void HeapAdjust(vector<int>& heap, int parent_index, int last_index)
     {
         if (index < last_index && heap[index] < heap[index+1])
             index ++;
-        if (heap[0] < heap[index])
-        {
-            heap[parent_index] = heap[index];
-            parent_index = index;
-        }
+        if (heap[0] >= heap[index]) // 提前终止下沉，因为 子树已经是堆
+            break;
+        heap[parent_index] = heap[index];
+        parent_index = index;
     }
     heap[parent_index] = heap[0];
 }
@@ -198,7 +254,7 @@ void MSort(vector<int> &src, vector<int> &dst, int start, int last)
 {
     if (start == last)
     {   //边界条件
-        //dst[start] = src[start];
+        dst[start] = src[start];
         return;
     }
     else
@@ -221,6 +277,7 @@ void MergeSort(vector<int> &vec)
 /// 基数排序， 稳定，时间复杂度O(d(n+r))，空间复杂度O(r)
 /// 数字排序中：r=10, d=最大数字位数，n=元素个数
 /// 一趟分配O(n)，一趟收集O(r)，进行d趟分配和收集，则时间复杂度为O(d(n+r))
+/// 只适合 非负整数，并且是升序；处理负数，分成负数和正数两个数组，对于负数，用绝对值排序，合并时从后往前
 void RadixSort()
 {
 
