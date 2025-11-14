@@ -4,6 +4,8 @@
 #include <stack>
 #include <queue>
 #include <string>
+#include <list>
+#include <vector>
 
 //层次构造二叉树
 BTreeNode* CreateBitTree()
@@ -181,13 +183,32 @@ Status RInOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 //非递归后序遍历二叉树
 Status RPostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 {
-
+	std::stack<BTreeNode *> S;
+	BTreeNode *p = T, *prev = NULL;
+	while (p || !S.empty()) {
+		if (p) {
+            S.push(p);
+            p = p->lchild;
+        } else {
+            p = S.top();
+            // 如果右子树为空，或右子树已访问过
+            if (p->rchild == NULL || p->rchild == prev) {
+                visit(p->data);
+                prev = p;
+                S.pop();
+                p = NULL; // 防止继续向左走
+            } else {
+                p = p->rchild; // 转向右子树
+            }
+        }
+	}
 	return OK;
 }
 
 //非递归层次遍历二叉树
 Status RLevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 {
+	// 如果节点数量固定或上限，则可以使用循环队列
 	std::queue<BTreeNode*> q;
 	BTreeNode *p = NULL;
 	q.push(T);
@@ -205,12 +226,102 @@ Status RLevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType))
 	}
 	return OK;
 }
+
+// 层次遍历二叉树， 返回二维数组，一行对应一层
+std::vector<std::vector<int>> RLevelorderTraverse2(BTreeNode *T) {
+	std::vector<std::vector<int>> ret;
+    if (T == NULL) {
+		return ret;
+	}
+	BTreeNode* p;
+	std::queue<BTreeNode*> q;
+	q.push(T);
+	while (!q.empty()) {
+		int size = q.size();
+		std::vector<int> currentLevel;
+		currentLevel.reserve(size);
+		for (int i=0; i < size; i++) {
+			p = q.front(); q.pop();
+			currentLevel.push_back(p->data);
+			if (p->lchild != NULL) {
+				q.push(p->lchild);
+			}
+			if (p->rchild != NULL) {
+				q.push(p->rchild);
+			}
+		}
+		ret.push_back(currentLevel);
+	}
+	return ret;
+}
+
+// 莫里斯前序遍历
+Status MorrisPreorderTraversal(BTreeNode* T, Status(*visit)(TElemType)) {
+    BTreeNode *cur = T;
+    while (cur) {
+        if (cur->lchild == NULL) {
+            // 如果没有左子树，直接访问当前节点并转向右子树
+            visit(cur->data);
+            cur = cur->rchild;
+        } else {
+            // 找到当前节点在中序遍历下的前驱节点
+            BTreeNode *pre = cur->lchild;
+            while (pre->rchild && pre->rchild != cur) {
+                pre = pre->rchild;
+            }
+            
+            if (pre->rchild == NULL) {
+                // 第一次访问，建立临时链接并访问当前节点
+                pre->rchild = cur;
+                visit(cur->data);  // 前序遍历：在第一次访问时输出
+                cur = cur->lchild;
+            } else {
+                // 第二次访问，恢复树结构并转向右子树
+                pre->rchild = NULL;
+                cur = cur->rchild;
+            }
+        }
+    }
+	return OK;
+}
+
+// Morris 中序遍历, 时间O(n)，空间O(1)
+// 有临时写操作， 不利于并发
+Status MorrisInorderTraversal(BTreeNode *T, Status(*visit)(TElemType)) {
+    BTreeNode* cur = T;
+    while (cur != NULL) {
+        if (cur->lchild == NULL) {
+            // 没有左子树：访问当前节点，然后去右子树
+            visit(cur->data);
+            cur = cur->rchild;
+        } else {
+            // 找到 cur 的中序前驱（左子树的最右节点）
+            BTreeNode* pre = cur->lchild;
+            while (pre->rchild != NULL && pre->rchild != cur) {
+                pre = pre->rchild;
+            }
+
+            if (pre->rchild == NULL) {
+                // 第一次到达：建立线索 pre->rchild = cur
+                pre->rchild = cur;
+                cur = cur->lchild;
+            } else {
+                // 第二次到达：说明左子树已遍历完，断开线索
+                pre->rchild = NULL;
+                visit(cur->data);  // 访问当前节点
+                cur = cur->rchild;
+            }
+        }
+    }
+	return OK;
+}
+
 //求二叉树的深度
 int Deep(BTreeNode *T)
 {
 	if (!T)
 		return 0;
-	else{
+	else {
         int n = Deep(T->lchild);
 		int m = Deep(T->rchild);
         if (n < m)

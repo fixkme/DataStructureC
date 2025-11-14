@@ -29,6 +29,9 @@ Status RPreOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //非递归�
 Status RInOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //非递归中序遍历二叉树
 Status RPostOrderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //非递归后序遍历二叉树
 Status RLevelorderTraverse(BTreeNode *T, Status(*visit)(TElemType)); //非递归层次遍历二叉树
+std::vector<std::vector<int>> RLevelorderTraverse2(BTreeNode *T); // 非递归层次遍历二叉树，返回二维数组，一行对应一层
+Status MorrisPreorderTraversal(BTreeNode* T, Status(*visit)(TElemType)); // Morris 前序遍历
+Status MorrisInorderTraversal(BTreeNode *T, Status(*visit)(TElemType)); // Morris 中序遍历
 int Deep(BTreeNode *T);											//求二叉树的深度
 
 BTreeNode* CreateBitSortTree();									//构造二叉排序树

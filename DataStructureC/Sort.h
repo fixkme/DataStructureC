@@ -70,6 +70,27 @@ void BubbleSort(vector<int> &vec)
     }
 }
 
+// 快排三点取中
+void MiddleAdjust(vector<int> &arr, int low, int high ) 
+{
+	if (high - low < 2) {
+        return;
+    }
+    auto swap = [](int *a, int *b) {
+        int tmp = *a; *a = *b; *b = tmp;
+    };
+    int mid = (low + high) / 2;
+    if (arr[low] > arr[high]) {
+        swap(&arr[low], &arr[high]);
+    }
+    if (arr[low] > arr[mid]) {
+        swap(&arr[low], &arr[mid]);
+    }
+    if (arr[high] < arr[mid]) {
+        swap(&arr[high], &arr[mid]);
+    }
+}
+
 ///快速排序， 不稳定，时间复杂度O(nlogn)，空间复杂度O(logn)
 /// 1、每次Partition便确定一个数pivot_key的位置，且pivot_key都大于左边的数，都小于右边的数
 /// 2、用于：Quickselect（排序第k的元素、中位数）、top-k(前k个元素)
