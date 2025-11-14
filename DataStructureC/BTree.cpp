@@ -257,31 +257,33 @@ std::vector<std::vector<int>> RLevelorderTraverse2(BTreeNode *T) {
 
 // 莫里斯前序遍历
 Status MorrisPreorderTraversal(BTreeNode* T, Status(*visit)(TElemType)) {
-    BTreeNode *cur = T;
-    while (cur) {
-        if (cur->lchild == NULL) {
-            // 如果没有左子树，直接访问当前节点并转向右子树
-            visit(cur->data);
-            cur = cur->rchild;
-        } else {
-            // 找到当前节点在中序遍历下的前驱节点
-            BTreeNode *pre = cur->lchild;
-            while (pre->rchild && pre->rchild != cur) {
-                pre = pre->rchild;
-            }
-            
-            if (pre->rchild == NULL) {
-                // 第一次访问，建立临时链接并访问当前节点
-                pre->rchild = cur;
-                visit(cur->data);  // 前序遍历：在第一次访问时输出
-                cur = cur->lchild;
-            } else {
-                // 第二次访问，恢复树结构并转向右子树
-                pre->rchild = NULL;
-                cur = cur->rchild;
-            }
-        }
-    }
+	BTreeNode *cur = T;
+	while (cur != nullptr) {
+		if (cur->lchild == nullptr) {
+			// 无左子树：访问当前节点，转向右子树
+			visit(cur->data);
+			cur = cur->rchild;
+		}
+		else {
+			// 有左子树：找左子树的最右节点（中序前驱）
+			BTreeNode *pre = cur->lchild;
+			while (pre->rchild != nullptr && pre->rchild != cur) {
+				pre = pre->rchild;
+			}
+
+			if (pre->rchild == nullptr) {
+				// 第一次到达：建立线索
+				visit(cur->data); // 👈 前序：在此处访问！
+				pre->rchild = cur;	// 建立线索
+				cur = cur->lchild;
+			}
+			else {
+				// 第二次到达：左子树已遍历完，恢复树结构
+				pre->rchild = nullptr;
+				cur = cur->rchild;
+			}
+		}
+	}
 	return OK;
 }
 
